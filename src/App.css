@@ -1,3 +1,6 @@
+body {
+  background-color: #eee;
+}
 .App {
   text-align: center;
 }
@@ -35,4 +38,144 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Side bar */
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 260px;
+  background-color: #eebb19;
+  transition: 0.3s ease-in-out;
+}
+
+.sidebar .logo-details {
+  height: 60px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.sidebar .logo-details img {
+  width: 45px;
+  margin: 10px;
+}
+
+.sidebar .logo-details .logo_name {
+  font-size: 26px;
+  color: #111;
+}
+
+.sidebar .nav-links {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  padding-top: 10px;
+}
+
+.sidebar .nav-links li {
+  position: relative;
+  list-style: none;
+}
+
+.sidebar .nav-links li div {
+  display: none;
+  color: #111;
+}
+
+.sidebar .nav-links li:hover div {
+  display: block;
+}
+
+.admin-drop {
+  background-color: #eebb19;
+}
+
+.sidebar .nav-links li .link {
+  color: #111;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  border-left: #111 0px solid;
+  display: block;
+  padding: 18px;
+  transform: 0.5s ease;
+}
+
+.admin-drop a {
+  color: #111;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+  transform: 0.3s ease;
+}
+
+.sidebar .nav-links li .link:hover {
+  background-color: #fdecb4;
+  border-left: #111 5px solid;
+}
+
+.sidebar .nav-links li .link:hover .icon {
+  color: #eebb19;
+}
+
+.sidebar .nav-links li .link i {
+  display: block;
+  padding-right: 20px;
+  text-align: center;
+  line-height: 50px;
+  color: #111;
+}
+
+.sidebar .nav-links li .link span {
+  margin-left: 30px;
+  transform: 0.2s ease;
+}
+
+.sidebar .close-tab {
+  position: fixed;
+  bottom: 0;
+  padding: 20px;
+  color: #111;
+  background-color: #eebb19;
+  cursor: pointer;
+}
+
+.sidebar .close-tab i {
+  color: #111;
+}
+
+/* Sidebar close */
+
+.sidebar.close ~ .content-section {
+  left: 55px;
+  width: calc(100% - 55px);
+}
+
+/* Content Section */
+
+.content-section {
+  position: relative;
+  left: 265px;
+  width: calc(100% - 265px);
+  height: 100vh;
+  transition: all 0.3s ease-in-out;
+  background-color: #fff;
+  padding: 10px;
+}
+
+/* Button btn */
+
+.btn-main {
+  background-color: #eebb19;
+}
+
+.searchBar {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
