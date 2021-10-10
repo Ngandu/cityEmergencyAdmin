@@ -1,6 +1,6 @@
-import * as firebase from "firebase";
-import "firebase/auth";
-import "firebase/firestore";
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
 
 export async function registration(
   email,
@@ -33,4 +33,45 @@ export async function registration(
 
 export async function usersList() {
   console.log("usersList");
+  try {
+    const db = firebase.firestore();
+    const querySnapshot = await db.collection("users").get();
+
+    let temp = [];
+    querySnapshot.forEach((doc) => {
+      //console.log(doc.id);
+      temp.push({ id: doc.id, ...doc.data() });
+    });
+
+    // console.log(temp);
+    return temp;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+/*
+  Incedents
+*/
+
+// new incedents
+
+export async function getNewIncedents() {
+  try {
+    const db = firebase.firestore();
+    const querySnapshot = await db
+      .collection("incedents")
+      .where("status", "==", "Open")
+      .get();
+
+    let temp = [];
+    querySnapshot.forEach((doc) => {
+      //console.log(doc.id);
+      temp.push({ id: doc.id, ...doc.data() });
+    });
+
+    return temp;
+  } catch (error) {
+    console.log(error);
+  }
 }

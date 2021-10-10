@@ -18,10 +18,16 @@ import CommonStore from "./../stores/CommonStore";
 // Screens
 import Home from "./../screens/Home";
 import UsersList from "./../screens/Users";
+import IncedentView from "./../screens/IncedentView";
 
 // Mobx Screens
-const MHome = () => <Home userstore={UserStore}></Home>;
+const MHome = () => (
+  <Home userstore={UserStore} CommonStore={CommonStore}></Home>
+);
 const MUsersList = () => <UsersList CommonStore={CommonStore}></UsersList>;
+const MIncedentView = () => (
+  <IncedentView CommonStore={CommonStore}></IncedentView>
+);
 
 const Screens = () => {
   return (
@@ -29,7 +35,6 @@ const Screens = () => {
       <>
         <div className="sidebar">
           <div className="logo-details">
-            <img src="img/logo-w.png" alt=""></img>
             <span className="logo_name">My City Admin</span>
           </div>
 
@@ -38,18 +43,6 @@ const Screens = () => {
               <Link to="/" className="link">
                 <FontAwesomeIcon icon={faHome} className="icon" />
                 <span className="kink_name">Dashboard</span>
-              </Link>
-            </li>
-            <li>
-              <Link className="link">
-                <FontAwesomeIcon icon={faTh} className="icon" />
-                <span className="kink_name">Products</span>
-              </Link>
-            </li>
-            <li>
-              <Link className="link">
-                <FontAwesomeIcon icon={faFile} className="icon" />
-                <span className="kink_name">Orders</span>
               </Link>
             </li>
             <li>
@@ -66,6 +59,7 @@ const Screens = () => {
         </div>
         <Switch>
           <Route path="/" exact component={MHome} />
+          <Route path="/IncedentView" exact component={MIncedentView} />
           <Route path="/users" component={MUsersList} />
         </Switch>
       </>

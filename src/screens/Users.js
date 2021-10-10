@@ -1,7 +1,7 @@
-import React, { useLayoutEffect } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import "./../App.css";
 import { observer } from "mobx-react-lite";
-//import { usersList } from "./../sdk/FirebaseMethods";
+import { usersList } from "./../sdk/FirebaseMethods";
 // import { useHistory } from "react-router-dom";
 
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -17,13 +17,18 @@ import { observer } from "mobx-react-lite";
 const UsersList = observer(({ CommonStore }) => {
   console.log(CommonStore);
 
-  // const getUsers = async () => {
-  //   usersList();
-  // };
+  const [Users, setUsers] = useState([]);
 
-  // useLayoutEffect(() => {
-  //   getUsers();
-  // }, []);
+  const getUsers = async () => {
+    const users = await usersList();
+    setUsers(users);
+  };
+
+  useLayoutEffect(() => {
+    getUsers();
+  }, []);
+
+  console.log(Users);
 
   return (
     <>
@@ -42,33 +47,28 @@ const UsersList = observer(({ CommonStore }) => {
         <table className="table">
           <thead>
             <tr>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
+              <th scope="col">Full Name</th>
+              <th scope="col">Cell</th>
               <th scope="col">Email</th>
-              <th scope="col">Action</th>
+              <th scope="col">physical Address</th>
+              <th scope="col">Home Number</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>
-                <button className="btn btn-outline-primary btn-sm">
-                  View Details
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-              <td>
-                <button className="btn btn-outline-primary btn-sm">
-                  View Details
-                </button>
-              </td>
-            </tr>
+            {Users &&
+              Users.map((usr, i) => {
+                return (
+                  <tr>
+                    <td>
+                      {usr.firstName} {usr.lastName}
+                    </td>
+                    <td>{usr.cellphone}</td>
+                    <td>{usr.email}</td>
+                    <td>{usr.address}</td>
+                    <td>{usr.resNumber}</td>
+                  </tr>
+                );
+              })}
           </tbody>
         </table>
       </div>

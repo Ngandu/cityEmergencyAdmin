@@ -47,8 +47,10 @@ body {
   top: 0;
   left: 0;
   height: 100%;
-  width: 260px;
-  background-color: #eebb19;
+  width: 200px;
+  background: #eebb19 url("../src/Assests/city.png") no-repeat center;
+  background-size: 400px;
+  background-position: bottom;
   transition: 0.3s ease-in-out;
 }
 
@@ -67,6 +69,7 @@ body {
 .sidebar .logo-details .logo_name {
   font-size: 26px;
   color: #111;
+  margin-left: 10px;
 }
 
 .sidebar .nav-links {
@@ -161,12 +164,13 @@ body {
 
 .content-section {
   position: relative;
-  left: 265px;
-  width: calc(100% - 265px);
+  left: 205px;
+  width: calc(100% - 235px);
   height: 100vh;
   transition: all 0.3s ease-in-out;
   background-color: #fff;
-  padding: 10px;
+  padding: 20px;
+  margin-top: 20px;
 }
 
 /* Button btn */
@@ -178,4 +182,23 @@ body {
 .searchBar {
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+.section-header {
+  background-color: #eebb19;
+  padding: 10px;
+  margin: 0px;
+}
+
+.map-container {
+  height: 500px;
+  width: "100vw";
+}
+
+.msgForm {
+  padding: 20px;
+}
+
+textarea {
+  margin-bottom: 10px;
 }

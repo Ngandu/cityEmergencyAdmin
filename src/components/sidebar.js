@@ -18,7 +18,6 @@ function SideBar() {
       <>
         <div className="sidebar">
           <div class="logo-details">
-            <img src="img/logo-w.png" alt=""></img>
             <span className="logo_name">My City Admin</span>
           </div>
 
