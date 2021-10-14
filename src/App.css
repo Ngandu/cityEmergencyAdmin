@@ -166,7 +166,6 @@ body {
   position: relative;
   left: 205px;
   width: calc(100% - 235px);
-  height: 100vh;
   transition: all 0.3s ease-in-out;
   background-color: #fff;
   padding: 20px;
@@ -201,4 +200,30 @@ body {
 
 textarea {
   margin-bottom: 10px;
+}
+
+.pastresponse {
+  margin-top: 30px;
+}
+
+.pastresponse small {
+  font-size: 0.5em;
+}
+
+.alert-admin {
+  background-color: #61dafb;
+}
+
+.serviceProviderListItem {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 5px;
+  cursor: pointer;
+}
+.serviceProviderListItem p {
+  margin: 0px;
+}
+
+.serviceProviderListItem:hover {
+  background-color: #ddd;
 }

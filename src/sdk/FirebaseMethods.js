@@ -75,3 +75,86 @@ export async function getNewIncedents() {
     console.log(error);
   }
 }
+
+// Update incedent
+
+export async function updateIncedents(inc) {
+  let id = inc.id;
+  let newInc = { ...inc };
+  delete newInc.id;
+  try {
+    const db = firebase.firestore();
+    await db.collection("incedents").doc(id).update(newInc);
+    return true;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+/*
+  response to incedents
+*/
+
+export async function sendresponse(resp) {
+  try {
+    const db = firebase.firestore();
+    await db.collection("responses").add(resp);
+    return true;
+  } catch (error) {
+    console.log(error);
+    return error.message;
+  }
+}
+
+// fetch responses
+
+export async function fetchresponses(id) {
+  try {
+    const db = firebase.firestore();
+
+    const querySnapshot = await db
+      .collection("responses")
+      .orderBy("respnsetime", "desc")
+      .where("incedentId", "==", id)
+      .get();
+
+    let temp = [];
+    querySnapshot.forEach((doc) => {
+      //console.log(doc.id);
+      temp.push({ id: doc.id, ...doc.data() });
+    });
+
+    return temp;
+  } catch (error) {
+    console.log(error);
+    return error.message;
+  }
+}
+
+/*
+  Service Providers
+
+*/
+
+export async function fetchserviceProviders(service) {
+  try {
+    const db = firebase.firestore();
+
+    const querySnapshot = await db
+      .collection("serviceProvider")
+      .where("service", "==", service)
+      .where("serviceStatus", "==", "available")
+      .get();
+
+    let temp = [];
+    querySnapshot.forEach((doc) => {
+      //console.log(doc.id);
+      temp.push({ id: doc.id, ...doc.data() });
+    });
+
+    return temp;
+  } catch (error) {
+    console.log(error);
+    return error.message;
+  }
+}
