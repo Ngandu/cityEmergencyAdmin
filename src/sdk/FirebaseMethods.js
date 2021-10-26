@@ -59,18 +59,31 @@ export async function usersList() {
 export async function getNewIncedents() {
   try {
     const db = firebase.firestore();
-    const querySnapshot = await db
+    await db
       .collection("incedents")
       .where("status", "==", "Open")
-      .get();
+      .onSnapshot((snapshot) => {
+        // console.log("snapshot", snapshot.docChanges());
 
-    let temp = [];
-    querySnapshot.forEach((doc) => {
-      //console.log(doc.id);
-      temp.push({ id: doc.id, ...doc.data() });
-    });
+        let docs = snapshot.docChanges();
+        let applications = [];
+        docs.forEach((doc) => {
+          console.log("doc", doc.doc.data());
+          if (doc.type == "added") {
+            applications.push({ id: doc.id, ...doc.doc.data() });
+          }
+        });
+        return applications;
+      });
+    //   .get();
 
-    return temp;
+    // let temp = [];
+    // querySnapshot.forEach((doc) => {
+    //   //console.log(doc.id);
+    //   temp.push({ id: doc.id, ...doc.data() });
+    // });
+
+    // return temp;
   } catch (error) {
     console.log(error);
   }

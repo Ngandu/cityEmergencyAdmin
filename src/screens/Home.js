@@ -3,6 +3,7 @@ import "./../App.css";
 import { observer } from "mobx-react-lite";
 import { getNewIncedents } from "./../sdk/FirebaseMethods";
 import { useHistory } from "react-router-dom";
+import firebase from "firebase/compat/app";
 
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import {
@@ -16,12 +17,25 @@ import { useHistory } from "react-router-dom";
 
 const Home = observer(({ userstore, CommonStore }) => {
   let history = useHistory();
+  const db = firebase.firestore();
 
   const [openIncedents, setOpenIncedents] = useState([]);
 
   const fetchIncedents = async () => {
-    let incedents = await getNewIncedents();
-    setOpenIncedents(incedents);
+    await db
+      .collection("incedents")
+      .where("status", "==", "Open")
+      .onSnapshot((snapshot) => {
+        let docs = snapshot.docChanges();
+        let applications = [];
+        docs.forEach((doc) => {
+          console.log("doc", doc.doc.data());
+          if (doc.type == "added") {
+            applications.push({ id: doc.doc.id, ...doc.doc.data() });
+          }
+        });
+        setOpenIncedents(applications);
+      });
   };
 
   useLayoutEffect(() => {

@@ -110,6 +110,8 @@ const IncedentView = observer(({ CommonStore }) => {
     }
   }
 
+  function renderresponse() {}
+
   console.log("serviceProviders", serviceProviders);
 
   return (
@@ -177,15 +179,17 @@ const IncedentView = observer(({ CommonStore }) => {
 
             <div className="row pastresponse">
               <h5>Past Responses</h5>
-              {pastResponses.map((resp, i) => {
-                return (
-                  <div className={`row alert alert-${resp.from}`} key={i}>
-                    <small>From: {resp.from}</small>
-                    <p>{resp.responseMessage}</p>
-                    <small>Sent: {Date(resp.respnsetime)}</small>
-                  </div>
-                );
-              })}
+              {pastResponses.length > 0
+                ? pastResponses.map((resp, i) => {
+                    return (
+                      <div className={`row alert alert-${resp.from}`} key={i}>
+                        <small>From: {resp.from}</small>
+                        <p>{resp.responseMessage}</p>
+                        <small>Sent: {Date(resp.respnsetime)}</small>
+                      </div>
+                    );
+                  })
+                : null}
             </div>
           </div>
         </div>
